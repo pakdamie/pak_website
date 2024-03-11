@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: March 10, 2024 --><html lang="en-us" >
+
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4321&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css" integrity="" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css" />
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<meta name="description" content="Simulate, simulate, simulate Running a linear regression is relatively easy. Everyone (and I mean everyone) has all happily typed &ldquo;lm()&rdquo; into R. However, while running regression on a data set is easy&hellip; How do you know you&rsquo;re right when doing statistical analyses?" />
+
+
+
+<link rel="alternate" hreflang="en-us" href="http://localhost:4321/post/2024-03-10-simulating-linear-regression/" />
+<link rel="canonical" href="http://localhost:4321/post/2024-03-10-simulating-linear-regression/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@GetResearchDev" />
+  <meta property="twitter:creator" content="@GetResearchDev" />
+<meta property="twitter:image" content="http://localhost:4321/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Damie Pak" />
+<meta property="og:url" content="http://localhost:4321/post/2024-03-10-simulating-linear-regression/" />
+<meta property="og:title" content="Linear regression: learning by simulation | Damie Pak" />
+<meta property="og:description" content="Simulate, simulate, simulate Running a linear regression is relatively easy. Everyone (and I mean everyone) has all happily typed &ldquo;lm()&rdquo; into R. However, while running regression on a data set is easy&hellip; How do you know you&rsquo;re right when doing statistical analyses?" /><meta property="og:image" content="http://localhost:4321/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:4321/post/2024-03-10-simulating-linear-regression/"
+  },
+  "headline": "Linear regression: learning by simulation",
+  
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Damie Pak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:4321/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Simulate, simulate, simulate Running a linear regression is relatively easy. Everyone (and I mean everyone) has all happily typed \u0026ldquo;lm()\u0026rdquo; into R. However, while running regression on a data set is easy\u0026hellip; How do you know you\u0026rsquo;re right when doing statistical analyses?"
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Linear regression: learning by simulation | Damie Pak</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="95afae6c30a9c5c1c272c1d47f59e2b5" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Damie Pak</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Damie Pak</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Linear regression: learning by simulation</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 1, 0001
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="simulate-simulate-simulate">Simulate, simulate, simulate</h1>
+<p><span class="newthought">Running a linear regression is relatively easy.</span> Everyone (and I mean <em>everyone</em>) has all happily typed &ldquo;lm()&rdquo; into R. However, while running regression on a data set is easy&hellip; How do you know you&rsquo;re right when doing statistical analyses? One can scoff that it&rsquo;s impossible to know if you&rsquo;re right. A very valid point! But we use the mathematical formulation of linear regression to simulate data. Then, we can run a statistical analysis! This document is heavily inspired from <em>Using Simulation to Study Linear Regression</em> by LeRoy A. Franklin which I encourage everyone to read.</p>
+<h1 id="linear-regression">Linear regression</h1>
+<p>Simple <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> linear regressions are described as: $$
+Y_i = \beta_0 + \beta_1 X_i + \epsilon,
+$$</p>
+<p>where <code>\(Y_i\)</code> are the outcomes and <code>\(X_i\)</code> are the observations, <code>\(\beta_0\)</code> is the intercept, <code>\(\beta_1\)</code> is the slope describing the relationship between <code>\(Y\)</code> and <code>\(X\)</code>. The error term , <code>\(\epsilon\)</code>, describes how the observed values deviate from the true values. Remember, we are usually trying to estimate what <code>\(\beta_0\)</code> , <code>\(\beta_1\)</code>, and <code>\(\sigma^2\)</code>, are.</p>
+<p>Using the above equation, we can now simulate our own data:</p>
+<p>$$
+y_i = 3 + 2x_i + \epsilon .
+$$</p>
+<p>Specifically, we set <code>\(\beta_0 = 3\)</code> and <code>\(\beta_1 = 2\)</code>. For the error term ($\epsilon$), an important assumption is that it is normally distributed with mean 0 and standard deviation <code>\(\sigma^2\)</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. In other words, <code>\(\epsilon \sim {N(0,\sigma^2)}\)</code>. But what does that mean? Let&rsquo;s write a simple code to generate some normal distributions with mean 0 and different variances.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">x_interest</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="m">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mean_interest</span> <span class="o">=</span> <span class="m">0</span> <span class="c1">#the mean is 0</span>
+</span></span><span class="line"><span class="cl"><span class="n">sigma_normal</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)</span> <span class="c1">#the standard deviations that we&#39;re interested in$</span>
+</span></span></code></pre></div><div class="figure">
+<img src="/post/2024-03-10-simulating-linear-regression/index_files/figure-html/unnamed-chunk-4-1.png" alt="Normal distributions with mean 0 and different standard deviations. As you increase the variance, the wider the distribution is" width="672" />
+<p class="caption"><span id="fig:unnamed-chunk-4"></span>Figure 1: Normal distributions with mean 0 and different standard deviations. As you increase the variance, the wider the distribution is</p>
+</div>
+<p>The normal distributions are centered on the same mean but the variance is quite different! If we sample from a narrower distribution, the numbers would not deviate that far from 0. However, if we have a higher variance (i.e., a wider distribution), then the numbers can deviate further from 0.</p>
+<p>With this in mind, we can add an error term to our equation and set the variance of the error term:</p>
+<p>$$
+y_i = 3 + 2x_i + \epsilon.
+$$</p>
+<p>One way to think about the above equation is that we have basically the deterministic part <code>\(3 + 2 x_i\)</code> and now we&rsquo;re adding noise that is described with a normal distribution. So for example, let&rsquo;s say the input I&rsquo;m interested is from 1 to 10. For each observation, we sample from the normal distribution and add it to the y-output. One assumption of linear regression is that the variance of the residuals has to be the same. From the simulation, the noise we are adding is from the same normal distribution. If the variance is different for each observation (for example, what if for an input of 3, the error term is described from a normal distribution with mean 0 and a standard deviation of 2), than our model is unable to accurately predict what we observed.</p>
+<p>I can sample from the normal distribution by using the R function rnorm. With rnorm I am telling R: &ldquo;Hey, with a normal distribution of mean 0 and a standard deviation of 1&hellip; Can you give me ten random values please<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>!&rdquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">set.seed</span><span class="p">(</span><span class="m">24601</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">rnorm_generated</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">num</span> <span class="o">=</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">frame</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">))</span> <span class="c1">#frame is just a way to identify</span>
+</span></span><span class="line"><span class="cl"><span class="nf">print</span><span class="p">(</span><span class="n">rnorm_generated</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">##           num frame
+</span></span><span class="line"><span class="cl">## 1  -0.2561510     1
+</span></span><span class="line"><span class="cl">## 2   0.5834819     2
+</span></span><span class="line"><span class="cl">## 3   0.4735194     3
+</span></span><span class="line"><span class="cl">## 4  -1.8780212     4
+</span></span><span class="line"><span class="cl">## 5  -0.2743209     5
+</span></span><span class="line"><span class="cl">## 6  -0.6362024     6
+</span></span><span class="line"><span class="cl">## 7   0.2569914     7
+</span></span><span class="line"><span class="cl">## 8  -0.2572872     8
+</span></span><span class="line"><span class="cl">## 9  -1.2291214     9
+</span></span><span class="line"><span class="cl">## 10 -3.2222501    10
+</span></span></code></pre></div><p>Let&rsquo;s visually see what is happening!</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt=""
+           src="/post/2024-03-10-simulating-linear-regression/index_files/figure-html/unnamed-chunk-8-1.gif"
+           loading="lazy" data-zoomable /></div>
+  </div></figure>
+<!-- --></p>
+<p>What does this say? For each observation, I&rsquo;m going to add the value that I sampled from the normal distribution. Let&rsquo;s show how this looks like!</p>
+<img src="/post/2024-03-10-simulating-linear-regression/index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<div class="figure">
+<img src="/post/2024-03-10-simulating-linear-regression/index_files/figure-html/unnamed-chunk-12-1.png" alt="The noise is sampled from the same normal distribution!" width="672" />
+<p class="caption"><span id="fig:unnamed-chunk-12"></span>Figure 2: The noise is sampled from the same normal distribution!</p>
+</div>
+<p>So the grey line and points represent the deterministic part ($3+ 2x$) and the colored points represent the output the error term is added! We now simulated data with the underlying process: <code>\(3 + 2x + \epsilon\)</code>.</p>
+<h1 id="mere-man">Mere man</h1>
+<p>Without our omniscient powers, we would only see the colored points! We simulated the underlying dynamics, so we know the truth, but in the world of man, we now have to figure out what <code>\(\hat{B}_0\)</code> and <code>\(\hat{B}_1\)</code> are.</p>
+<img src="/post/2024-03-10-simulating-linear-regression/index_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<h1 id="sum-of-least-squares">Sum of least squares</h1>
+<p>The typical method for solving linear regressions is by fitting a line that minimizes the vertical distances between the line and the observations. We do this by using the sum of least squares. It&rsquo;s simple data-fitting and all we have to do is some calculations.</p>
+<p>You can skip it if you just want the answers, but a good coding exercise would be to code this yourself.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">calculate_least_squares</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="n">data.frame</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">N</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_func.xy</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input</span> <span class="o">*</span> <span class="n">data.frame</span><span class="o">$</span><span class="n">y_output_error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_func_x_y</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input</span><span class="p">)</span> <span class="o">*</span>         <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">y_output_error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_func.x2</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input^2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_fun.x_2</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input</span><span class="p">)</span><span class="n">^2</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">sum_y</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">y_output_error</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Slope</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(((</span><span class="n">N</span> <span class="o">*</span> <span class="n">sum_func.xy</span><span class="p">)</span> <span class="o">-</span> <span class="n">sum_func_x_y</span><span class="p">)</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">((</span><span class="n">N</span><span class="o">*</span><span class="n">sum_func.x2</span><span class="p">)</span>  <span class="o">-</span> <span class="n">sum_fun.x_2</span> <span class="p">),</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">slope_sum_x</span> <span class="o">&lt;-</span>  <span class="n">Slope</span> <span class="o">*</span> <span class="nf">sum</span><span class="p">(</span><span class="n">data.frame</span><span class="o">$</span><span class="n">x_input</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Intercept</span> <span class="o">=</span> <span class="nf">round</span><span class="p">((</span><span class="n">sum_y</span> <span class="o">-</span> <span class="n">slope_sum_x</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="kr">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#34;B0&#34;</span><span class="p">,</span><span class="n">Intercept</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#34;=&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">paste</span><span class="p">(</span><span class="s">&#34;B1&#34;</span><span class="p">,</span> <span class="n">Slope</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s">&#34;=&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Let&rsquo;s try it out:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">calculate_least_squares</span><span class="p">(</span><span class="n">regression_df</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## [1] &#34;B0=3.57&#34; &#34;B1=1.78&#34;
+</span></span></code></pre></div><p>I got the intercept of 3.57 and the slope is 1.78! Similar to our simulated <code>\(B_0\)</code> and <code>\(B_1\)</code>. Let&rsquo;s also calculate the standard error of the residuals:</p>
+<p>$$ \frac{\sum (y - \hat{y})^2}{n -2}$$</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pop_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">sum</span><span class="p">(((</span><span class="m">3.57</span> <span class="o">+</span> <span class="m">1.78</span> <span class="o">*</span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">))</span><span class="o">-</span><span class="n">regression_df[</span><span class="p">,</span><span class="s">&#34;y_output_error&#34;</span><span class="n">]</span><span class="p">)</span> <span class="n">^2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">10</span> <span class="m">-2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">print</span><span class="p">(</span><span class="n">pop_se</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## [1] 1.022929
+</span></span></code></pre></div><p>We see that the variance of the error term is 1.023</p>
+<h1 id="verifying-with-the-lm-function">Verifying with the lm function</h1>
+<p>Moment of truth, does our findings match with the R function?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">y_output_error</span> <span class="o">~</span> <span class="n">x_input</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">regression_df</span><span class="p">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 
+</span></span><span class="line"><span class="cl">## Call:
+</span></span><span class="line"><span class="cl">## lm(formula = y_output_error ~ x_input, data = regression_df)
+</span></span><span class="line"><span class="cl">## 
+</span></span><span class="line"><span class="cl">## Residuals:
+</span></span><span class="line"><span class="cl">##     Min      1Q  Median      3Q     Max 
+</span></span><span class="line"><span class="cl">## -1.5704 -0.4359  0.2285  0.5284  1.2372 
+</span></span><span class="line"><span class="cl">## 
+</span></span><span class="line"><span class="cl">## Coefficients:
+</span></span><span class="line"><span class="cl">##             Estimate Std. Error t value Pr(&gt;|t|)    
+</span></span><span class="line"><span class="cl">## (Intercept)   3.5892     0.6987   5.137 0.000889 ***
+</span></span><span class="line"><span class="cl">## x_input       1.7758     0.1126  15.769 2.61e-07 ***
+</span></span><span class="line"><span class="cl">## ---
+</span></span><span class="line"><span class="cl">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+</span></span><span class="line"><span class="cl">## 
+</span></span><span class="line"><span class="cl">## Residual standard error: 1.023 on 8 degrees of freedom
+</span></span><span class="line"><span class="cl">## Multiple R-squared:  0.9688,	Adjusted R-squared:  0.9649 
+</span></span><span class="line"><span class="cl">## F-statistic: 248.7 on 1 and 8 DF,  p-value: 2.613e-07
+</span></span></code></pre></div><p>The results are similar to what we got when we see that&rsquo;s what we found when we estimate <code>\(B_0\)</code> (estimate of the intercept), <code>\(B_1\)</code> (estimate of the x_input), and <code>\(\sigma^2\)</code> (the residual standard error)! Now as a lesson to the reader&hellip; How does increasing the sample size affect our estimates?</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+<p>Thank you to my partner (Caitlin Lienkaemper) who read the first draft.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Yet very powerful&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><code>\(\sigma\)</code> is the standard deviation and <code>\(\sigma^2\)</code> is the variance. Remember, the standard deviation is the square root of the variance!&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>&ldquo;Be nice to machines to survive the AI uprising! I heard a lot of people say please and thank you to Chatgpt&rdquo;&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F&amp;text=Linear&#43;regression%3A&#43;learning&#43;by&#43;simulation" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F&amp;t=Linear&#43;regression%3A&#43;learning&#43;by&#43;simulation" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Linear%20regression%3A%20learning%20by%20simulation&amp;body=http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F&amp;title=Linear&#43;regression%3A&#43;learning&#43;by&#43;simulation" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Linear&#43;regression%3A&#43;learning&#43;by&#43;simulation%20http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=http%3A%2F%2Flocalhost%3A4321%2Fpost%2F2024-03-10-simulating-linear-regression%2F&amp;title=Linear&#43;regression%3A&#43;learning&#43;by&#43;simulation" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+<p class="powered-by">
+  
+  <a href="/privacy/">Privacy Policy</a>
+  
+  
+   &middot; 
+  <a href="/terms/">Terms</a>
+  
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js" integrity="" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+  <script src="/js/wowchemy-headroom.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.js"></script>
+
+
+
+  <script src="/js/wowchemy-map.js" type="module"></script>
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
